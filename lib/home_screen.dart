@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pokemon_project/pokdex_card.dart';
-import 'services/model_page.dart';
+import 'model_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  get futurePost => null;
-
   // late Future<Pokemon> futurePokemon;
   //
   // @override
@@ -20,27 +20,26 @@ class _HomePageState extends State<HomePage> {
   //   futurePokemon = fetchPokemon();
   // }
 
+
   @override
   Widget build(BuildContext context) {
-    // getData();
     return Scaffold(
-      backgroundColor: Colors.black38,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Pokedex',
         ),
         centerTitle: true,
       ),
-      body: ListView(padding: const EdgeInsets.all(16), children: const [
+      body: ListView(padding: EdgeInsets.all(16), children: [
         PokedexCard(),
         SizedBox(
           height: 20,
         ),
-        PokedexCard(),
-        SizedBox(
-          height: 20,
-        ),
-        PokedexCard(),
+        // PokedexCard(),
+        // SizedBox(
+        //   height: 20,
+        // ),
+        // PokedexCard(),
       ]),
     );
   }
