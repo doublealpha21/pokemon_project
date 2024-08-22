@@ -6,7 +6,6 @@ import 'model_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -20,9 +19,9 @@ class _HomePageState extends State<HomePage> {
   //   futurePokemon = fetchPokemon();
   // }
 
-
   @override
   Widget build(BuildContext context) {
+    getData();
     return Scaffold(
       appBar: AppBar(
         title: Text(

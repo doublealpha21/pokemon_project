@@ -49,11 +49,29 @@ class Pokemon {
 
 Future<Pokemon> fetchPokemon() async {
   final response =
-      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/20'));
+      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/26'));
 
   if (response.statusCode == 200) {
     return Pokemon.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
   } else {
     throw Exception('Failed to load Pokemon from Server');
+  }
+}
+
+void getData() async {
+  http.Response response =
+      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/25'));
+
+  if (response.statusCode == 200) {
+    String data = response.body;
+
+    var forms = jsonDecode(data)['abilities'][0]['ability']['name'];
+    print(forms);
+
+    var name = jsonDecode(data)['base_experience'];
+    print(name);
+  } else {
+    // throw Exception('Failed to load Pokemon from Server');
+    print(response.statusCode);
   }
 }
