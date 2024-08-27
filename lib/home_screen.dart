@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    // getData();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20,
         ),
-        // PokedexCard(),
-        // SizedBox(
-        //   height: 20,
-        // ),
+        PokedexCard(),
+        SizedBox(
+          height: 20,
+        ),
         // PokedexCard(),
       ]),
     );

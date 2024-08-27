@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_project/model_page.dart';
 
 class PokedexCard extends StatefulWidget {
-  const PokedexCard({Key? key}) : super(key: key);
+  const PokedexCard({super.key});
 
   @override
   State<PokedexCard> createState() => _PokedexCardState();
@@ -23,18 +23,15 @@ class _PokedexCardState extends State<PokedexCard> {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(16),
         ),
-        color: Colors.amber,
-        shape: BoxShape.rectangle,
+        color: Colors.green[100],
+        // shape: BoxShape.rectangle,
       ),
-      width: double.infinity,
-      // width: width,
       // height: height,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Row(
         children: [
           Column(
             children: [
@@ -42,33 +39,71 @@ class _PokedexCardState extends State<PokedexCard> {
                 future: futurePokemon,
                 builder: (context, pokemon) {
                   if (pokemon.hasData) {
-                    return Column(
-                      children: [
-                        Text(
-                          pokemon.data!.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(),
-                        ),
-
-                        ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              pokemon.data!.abilities;
-                              return ListTile(
-                                title: Text(
-                                  pokemon.data!.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayMedium
-                                      ?.copyWith(
-                                        color: Colors.red,
-                                      ),
-                                ),
-                              );
-                            })
-                      ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Id:${pokemon.data!.id}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(),
+                          ),
+                          Text(
+                            'Name:${pokemon.data!.name}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(),
+                          ),
+                          Text(
+                            'Base Experience:${pokemon.data!.baseExperience}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(),
+                          ),
+                          Text(
+                            'Order:${pokemon.data!.order.toString()}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(),
+                          ),
+                          Text(
+                            'Height:${pokemon.data!.height.toString()}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(),
+                          ),
+                          Text(
+                            pokemon.data!.weight.toString(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(),
+                          ),
+                          // ListView.builder(
+                          //     itemCount: 3,
+                          //     itemBuilder: (context, index) {
+                          //       pokemon.data!.abilities;
+                          //       return ListTile(
+                          //         title: Text(
+                          //           pokemon.data!.name,
+                          //           style: Theme.of(context)
+                          //               .textTheme
+                          //               .displayMedium
+                          //               ?.copyWith(
+                          //                 color: Colors.red,
+                          //               ),
+                          //         ),
+                          //       );
+                          //     })
+                        ],
+                      ),
                     );
                   } else if (pokemon.hasError) {
                     return Text('${pokemon.error}');
@@ -79,48 +114,11 @@ class _PokedexCardState extends State<PokedexCard> {
               ),
             ],
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     children: [
-          //       Container(
-          //         width: width * 0.3,
-          //         child: const Text(
-          //           'Height',
-          //           style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          //         ),
-          //       ),
-          //       Container(
-          //         child: const Text(
-          //           '',
-          //           // widget.pokemonDetail['height'],
-          //           style: TextStyle(color: Colors.black, fontSize: 17),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     children: [
-          //       Container(
-          //         width: width * 0.3,
-          //         child: const Text(
-          //           'Weight',
-          //           style: TextStyle(color: Colors.blueGrey, fontSize: 17),
-          //         ),
-          //       ),
-          //       Container(
-          //         child: const Text(
-          //           '',
-          //           // widget.pokemonDetail['height'],
-          //           style: TextStyle(color: Colors.black, fontSize: 17),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Container(
+            padding: const EdgeInsets.all(4),
+            width: width * 0.5,
+            child: Image.asset('images/pokeball_image.jpg'),
+          )
         ],
       ),
     );
