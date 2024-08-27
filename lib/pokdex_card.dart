@@ -16,6 +16,7 @@ class _PokedexCardState extends State<PokedexCard> {
     super.initState();
     futurePokemon = fetchPokemon();
   }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -26,12 +27,12 @@ class _PokedexCardState extends State<PokedexCard> {
         borderRadius: BorderRadius.all(
           Radius.circular(8),
         ),
-        color: Colors.white,
+        color: Colors.amber,
         shape: BoxShape.rectangle,
       ),
-      // width: double.infinity,
-      width: width,
-      height: height,
+      width: double.infinity,
+      // width: width,
+      // height: height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -41,12 +42,33 @@ class _PokedexCardState extends State<PokedexCard> {
                 future: futurePokemon,
                 builder: (context, pokemon) {
                   if (pokemon.hasData) {
-                    return Text(
-                      pokemon.data!.name,
-                      // style:
-                      //     Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      //           color: Colors.red,
-                      //         ),
+                    return Column(
+                      children: [
+                        Text(
+                          pokemon.data!.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(),
+                        ),
+
+                        ListView.builder(
+                            itemCount: 3,
+                            itemBuilder: (context, index) {
+                              pokemon.data!.abilities;
+                              return ListTile(
+                                title: Text(
+                                  pokemon.data!.name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium
+                                      ?.copyWith(
+                                        color: Colors.red,
+                                      ),
+                                ),
+                              );
+                            })
+                      ],
                     );
                   } else if (pokemon.hasError) {
                     return Text('${pokemon.error}');
@@ -55,31 +77,6 @@ class _PokedexCardState extends State<PokedexCard> {
                   return const CircularProgressIndicator();
                 },
               ),
-              FutureBuilder<Pokemon>(
-                  future: futurePokemon,
-                  builder: (context, pokemon) {
-                    if (pokemon.hasData) {
-                      return ListView.builder(
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            pokemon.data!.abilities;
-                            return ListTile(
-                              title: Text(
-                                pokemon.data!.name,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(
-                                      color: Colors.red,
-                                    ),
-                              ),
-                            );
-                          });
-                    } else if (pokemon.hasError) {
-                      return Text('${pokemon.error}');
-                    }
-                    return const CircularProgressIndicator();
-                  })
             ],
           ),
           // Padding(
