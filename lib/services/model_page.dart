@@ -50,7 +50,7 @@ class Pokemon {
 
 Future<Pokemon> fetchPokemon() async {
   final response =
-      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/26'));
+      await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/25'));
 
   if (response.statusCode == 200) {
     return Pokemon.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
