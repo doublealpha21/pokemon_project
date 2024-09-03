@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pokemon_project/services/model_page.dart';
 import 'services/list2.dart';
@@ -13,12 +15,14 @@ class _PokedexCardState extends State<PokedexCard> {
   late Future<Pokemon> futurePokemon;
   late Future<PokemonList> futurePokemonList;
   late Future<Result> futurePokemonResult;
+  List<Result> allpokemonlist = [];
 
   @override
   void initState() {
     super.initState();
     futurePokemon = fetchPokemon();
     futurePokemonList = fetchPokemonList();
+    futurePokemonResult = futurePokemonResult;
   }
 
   @override
@@ -139,21 +143,6 @@ class _PokedexCardState extends State<PokedexCard> {
             height: 20,
             color: Colors.grey[300],
           ),
-          // FutureBuilder<PokemonList>(
-          //     future: fetchPokemonList(),
-          //     builder: (context, pokemonList) {
-          //       if (pokemonList.hasData) {
-          //         List<Result> results = List<Result>();
-          //         for (int i = 0; i < pokemonList.data!.count! - 1; i++) {
-          //           results.add(Result(
-          //               name: pokemonList.data?.results.toString(),
-          //               url: pokemonList.data?.results.toString()));
-          //         }
-          //       } else if (pokemonList.hasError) {
-          //         return Text("${pokemonList.error}");
-          //       }
-          //       return const CircularProgressIndicator();
-          //     })
         ],
       ),
     );

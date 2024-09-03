@@ -47,10 +47,46 @@ Future<PokemonList> fetchPokemonList() async {
   final response =
       await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?limit=151'));
 
-  if (response.statusCode == 200) {
-    return PokemonList.fromJson(
-        jsonDecode(response.body) as Map<String, dynamic>);
-  } else {
-    throw Exception('Failed to load Pokemon from Server');
+  var jsonData = jsonDecode(response.body);
+
+  for (var eachPokemon in jsonData['data']) {
+    final pokemon = Result(name: eachPokemon['name'], url: eachPokemon['url']);
+    // allPokemonList.add(allPokemonList);
+  }
+  throw Exception('Failed to load Pokemon from Server');
+
+  // if (response.statusCode == 200) {
+  //   return PokemonList.fromJson(
+  //       jsonDecode(response.body) as Map<String, dynamic>);
+  // } else {
+  //   throw Exception('Failed to load Pokemon from Server');
+  // }
+
+  // if (response.statusCode == 200) {
+  //   final data = json.decode(response.body);
+  //   setState(() {
+  //     _allpokemonlist = (data['results'] as List)
+  //         .map((pokemonData) => Result.fromJson(pokemonData))
+  //         .toList();
+  //   });
+  // } else {
+  //   throw Exception('Failed to load Pokémon');
+  // }
+}
+
+class PokemonRepository {
+  List<PokemonList> allpokemonlist = [];
+
+  Future<void> fetchPokemon() async {
+    final response = await http
+        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?limit=151'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final pokemonList = PokemonList.fromJson(data);
+      allpokemonlist = pokemonList.results.cast<PokemonList>();
+    } else {
+      throw Exception('Failed to load Pokémon');
+    }
   }
 }
